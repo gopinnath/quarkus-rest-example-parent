@@ -15,10 +15,13 @@ public class GreetingResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String hello(@HeaderParam("key") String key, @HeaderParam("api-key") String apiKey) {
+    public String hello(@HeaderParam("key") String key,
+                        @HeaderParam("api-key") String apiKey,
+                        @HeaderParam("dynamic-api-key") String dynamicApiKey) {
         LOGGER.info("Inside hello method...");
         LOGGER.info("Key received is " + key);
         LOGGER.info("Api Key received is " + apiKey);
+        LOGGER.info("Dynamic Api Key received is " + dynamicApiKey);
         return "Hello From Example Service";
     }
 }

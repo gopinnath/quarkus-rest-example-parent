@@ -2,6 +2,7 @@ package org.gopinnath.quarkus.client.proxy.example;
 
 import org.eclipse.microprofile.config.ConfigProvider;
 import org.eclipse.microprofile.rest.client.annotation.ClientHeaderParam;
+import org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import javax.enterprise.inject.Default;
@@ -14,8 +15,10 @@ import java.util.List;
 import java.util.Set;
 
 @RegisterRestClient(baseUri = "http://localhost:8000")
+@RegisterClientHeaders(MyRemoteHeaderFactory.class)
 @ClientHeaderParam(name = "Key", value = "{getApiKey}")
 @ClientHeaderParam(name = "api-key", value = "{getConfigValue}")
+@ClientHeaderParam(name = "dynamic-api-key", value = "${api-key}")
 public interface MyRemoteService {
 
     default String getApiKey() {
